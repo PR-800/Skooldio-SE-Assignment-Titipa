@@ -13,10 +13,13 @@ function Card() {
   }, []);
 
   // Like/Unlike Toggle
-  const [liked, setLiked] = useState(false);
+  const [likedItems, setLikedItems] = useState({});
 
-  const toggleLike = () => {
-    setLiked((prev) => !prev);
+  const toggleLike = (id) => {
+    setLikedItems((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
   };
 
   return (
@@ -36,9 +39,9 @@ function Card() {
             </div>
 
             <ion-icon
-              name={liked ? "heart" : "heart-outline"}
+              name={likedItems[program.id] ? "heart" : "heart-outline"}
               class="heart"
-              onClick={toggleLike}
+              onClick={() => toggleLike(program.id)}
             ></ion-icon>
           </div>
 
